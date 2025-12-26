@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wildfire Burn Severity Mapping - 2025 Crabapple Fire</title>
+
+  <style>
+    body {
+      font-family: Trebuchet MS, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ddd;
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+</nav>
+
+<h1>Wildfire Burn Severity Mapping</h1>
+<p><strong>Tools:</strong> ArcGIS Pro, Senintel-2 Imagery, Raster Algebra</p>
+
+---
+
+<h2>Overview</h2>
+<p>
+This project evaluates wildfire burn severity using differenced Normalized Burn
+Ratio (dNBR) derived from pre- and post-fire Senintel-2 surface reflectance imagery.
+The objective was to identify spatial patterns of burn severity across the fire
+perimeter.
+</p>
+
+---
+
+<h2>Data</h2>
+<ul>
+  <li>Senintel-2 Imagery (pre- and post-fire)</li>
+  <li>Study area boundary</li>
+</ul>
+
+---
+
+<h2>Methods</h2>
+<ul>
+<li>Calculated NBR using NIR () and SWIR () bands</li>
+  <li>Computed dNBR with raster differencing</li>
+  <li>Classified burn severity using published thresholds from National Forest Service</li>
+</ul>
+
+---
+
+<h2>Crabapple Burn Severity Map</h2>
+
+<!-- MAP EMBED GOES HERE -->
+<iframe
+  class="map-embed"
+  src="url-here"
+  loading="lazy">
+</iframe>
+
+<p>
+Low values may be due to published thresholds being created from heavily forested environments rather than adapted to the savannah environment of the Texas Hill Country.
+</p>
+
+---
+
+<p>
+<a href="index.html">← Back to Projects</a>
+</p>
+
+</body>
+</html>
