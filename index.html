@@ -3,19 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Maxwell Francisco | GIS Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      line-height: 1.6;
-    }
-    nav a {
-      margin-right: 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    line-height: 1.6;
+  }
+
+  nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .projects {
+    margin-top: 40px;
+  }
+
+  .project-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .project-card a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .project-card a:hover h3 {
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
 
@@ -24,18 +44,38 @@
   <a href="resume.html">Resume</a>
 </nav>
 
-<h1 style="color: red;">Maxwell Francisco</h1>
+<h1>Maxwell Francisco</h1>
+
+<p>
+  <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">
+    LinkedIn
+  </a>
+</p>
+
 <p>Focused on spatial analysis, cartography, and remote sensing.</p>
 
-<h2>proj 1</h2>
-<p>
-stuff stuff stuff
-</p>
+<section class="projects">
+  <h2>Projects</h2>
 
-<h2>proj 2</h2>
-<p>
-stuff stuff stuff
-</p>
+  <div class="project-card">
+    <a href="proj1.html">
+      <h3>Proj 1</h3>
+      <p>
+        stuff stuff
+      </p>
+    </a>
+  </div>
+
+  <div class="project-card">
+    <a href="proj2.html">
+      <h3>proj 2</h3>
+      <p>
+        stuff stuff
+      </p>
+    </a>
+  </div>
+
+</section>
 
 </body>
 </html>
