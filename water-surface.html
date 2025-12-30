@@ -103,106 +103,82 @@ ArcGIS Online Viewer
   loading="eager">
 </iframe>
 
-<h2>Code</h2>
+<h2>Main Code snippet:</h2>
+<p> Full Code: </p> <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">Google Collab</a>
 <pre>
   <code>
-    ### Helping Dictionaries, Lists, Sets ###
-
-# Dictionary for the determineSatellite function to work
-BandMap = {
-    'LC08': {'NIR': 'B5', 'Green': 'B3'},
-    'LC09': {'NIR': 'B5', 'Green': 'B3'},
-    'LE07': {'NIR': 'B4', 'Green': 'B2'},
-    'LT05': {'NIR': 'B4', 'Green': 'B2'}}
-
-# Necessary 2D list argument for the ArcPy Reclassify method
-remap = RemapRange([
-    [-100000, 0, "NODATA"],   # < 0 becomes NoData
-    [0.0000001, 100000, 1]])  # > 0 becomes 1
-
-### Helping Functions ###
-def createFolders(proj_path, water_body):
-    path = proj_path + "\\" + water_body.replace(" ", "_")
-    os.makedirs(path, exist_ok=True)
-    print(f"{path} created or already existed.")
-    landsats = path+r"\Landsats"
-    os.makedirs(landsats, exist_ok=True) # Folder must contain subfolders that are named with their respective year for organization/graph
-    print(f"{landsats} created or already existed.")
-    study_area = path+r"\Study_area" #Folder to contain all the shapefiles which needed to be added by user
-    os.makedirs(study_area, exist_ok=True)
-    print(f"{study_area} created or already existed.")
-    ndwi_output = path+r"\NDWI_reclass_output" # Output folder for all reclassed rasters showing water body\n",
-    os.makedirs(ndwi_output, exist_ok=True)
-    print(f"{ndwi_output} created or already existed.")
-    return path, landsats, study_area, ndwi_output
-
-def determineSatellite(filename):
+def main(study_area_filename):
     '''
-    Determines the files to assign to each band of the NDWI calculation based on the Landsat satellite the images are taken from by using a dictionary.
-    INPUT: string argument of the file name
+    Main script processing all images with a loop through all years, calculating NDWI, 
+    clipping to the given study area polygon, and reclassifying images to show visual representation.
+    INPUT: string provided in setup of the filename for the study area
     USAGE:
-    >>determineSatellite("LC09_L2SP_174077_20230521_20230523_02_T1_SR_B5")
-    '''
-    for sat in BandMap:
-        if filename.startswith(sat):
-            return sat
-
-def calcNDWI(scene):
-    '''
-    Computes the NDWI index given the required band files.
-    INPUT: dictionary with NIR/Green bands as keys and filenames as values
-    USAGE:
-    >>calcNDWI({'NIR':'LC09_L2SP_174077_20230521_20230523_02_T1_SR_B5', 'Green': 'LC09_L2SP_174077_20230521_20230523_02_T1_SR_B3' })
-    '''
-    nir = Raster(scene["NIR"])
-    green = Raster(scene["Green"])
-    index = (green - nir) / (green + nir)
-    return index
-
-def calcArea(counts):
-    '''
-    Calculates the area of the lakes in both meters squared and acres and appends them into respective lists.
-    INPUT: list containing pixel counts for each image
-    USAGE:
-    >>calcArea([387389, 3289382, 2323, 32334])
+    >>main("amistad_study_area.shp")
     '''
 
-    acres = []
-    meters_sq = []
+    count_list = []
+    year_list = []
+    date_list = []
     
-    for item in counts:
-        new = item*900 # M^2 conversion factor
-        meters_sq.append(new)
+    for root, dirs, files in os.walk(landsats): #for folder in landsats
+    
+        if root == landsats: # skipping the parent folder bc it'll return a dictionary error bc theres no bands in this folder
+            continue
+        
+        scenes = {}   # reset for each folder, empty dictionary to contain keys of NIR and Green to access their respective files
+        subfolder_name = os.path.basename(root) # Retrieves the subfolder name, which should be the year of the images
+        print(f"Starting processing for {subfolder_name}")
+        
+        for file in files: #for file in folder in landsats
+            
+            if file.endswith(".aux.xml"):
+                continue
+    
+            file_name = os.path.basename(file)
+            satellite = determineSatellite(file_name)
+            bands = BandMap[satellite]
+            date = file_name[17:25]
+            
+            if bands['NIR'] in file_name:
+                scenes['NIR'] = os.path.join(root, file) # Assigning the file to 'NIR' and 'Green' in a dictionary to access for raster calculation
+            elif bands['Green'] in file_name:
+                scenes['Green'] = os.path.join(root, file)
+    
+        result = calcNDWI(scenes) # Uses calcNDWI function on the scenes set, computing ndwi for this year
 
-    for item in meters_sq:
-        new = item/4047 # M^2 conversion to acres conversion factor
-        acres.append(new)
+        print(f"Calculated NDWI for {subfolder_name}")
 
-    return meters_sq, acres
-    print("Square meters and acreage calculated and added to lists")
+        # MOVE THIS TO UP THE PROCESSING TIME ON ALL THE NDWI IMAGES- MOVE IT TO BEFORE THE NDWI CALCULATION??? MAY NEED TO CHANGE SOME SYSTEMS 
+        # Clipping the result of the NDWI to only the waterbody to exclude other ones
+        clip_out = path+"\\"+f"out{subfolder_name}.tif"
+        try:
+            study_area_shapefile = study_area + "\\" + study_area_filename
+            arcpy.management.Clip(result, "", clip_out , in_template_dataset=study_area_shapefile, clipping_geometry=True, nodata_value=0)
+        except arcpy.ExecuteError:
+            print(arcpy.GetMessages(2))
+            print(f"USER ERROR: This error is likely caused by there being no shapefile in {study_area} folder. Put a shapefile in this folder to solve this error")
+        
+        # Reclassifying the clipped raster so that now only the values >0 remain, which are the water values
+        reclass_out = Reclassify(clip_out, "Value", remap, "NODATA")
+        arcpy.management.Delete(clip_out) #delete the clipped raster, no longer needed
+        reclass = (f"ndwi_clip_reclass_{subfolder_name}.tif")
+        reclass_outpath = os.path.join(ndwi_output, reclass)
+        reclass_out.save(reclass_outpath)
+        print(f"Reclassified image to NaN value for non-water.")
+        
+        #Pandas dataframe for the count of the values in raster
+        arcpy.management.BuildRasterAttributeTable(reclass_outpath, "OVERWRITE") 
+        fields = ["VALUE", "COUNT"] 
+        
+        with arcpy.da.SearchCursor(reclass_outpath, fields) as cursor:
+            for row in cursor:
+                count_list.append(row[1])
+                year_list.append(subfolder_name)
+                date_list.append(date)
+        print("=+=+="*20)
 
-def makeGraph(water_body, years, counts, meters_sq, acres, dates):
-    '''
-    Makes a graph using given title showing change over time of water body surface area in acres or meters squared.
-    INPUT: water body name (string), years (list), pixel counts (list), square meters (list), acres (list)
-    USAGE:
-    >>makeGraph("Amistad Reservoir", [2014, 2020],[2820, 2910],[13900, 12810],[120011,192101],[12012014, 12132020])
-    '''
-    pandas_list = [years, counts, meters_sq, acres, dates]
-    df = pd.DataFrame(pandas_list).transpose()
-    df.columns = ["Year", "Count (pixels)", "Square meters (m^2)", "Acres", "Dates"]
-    fig, ax = plt.subplots()
-    ax.plot(pandas_list[0], pandas_list[3], 'o-', color = "blue")
-    ax.grid()
-    ax.set(xlabel = "Year", ylabel = "Water Surface Area (acres)", title = f"Surface Area of {water_body}")
-    plt.xticks(pandas_list[0])
-    outname = water_body.replace(" ","_")
-    outfile = path+ "\\" + f"figure_{outname}.png"
-    plt.savefig(outfile, dpi = 300)
-    print(f"Graph saved to {outfile}")
-    plt.show()
-    df.to_csv(f'{water_body}_stats.csv')
-    print(df)
+    return count_list, year_list, date_list
+    print("====="*10 + " Done. " + "====="*10)
   </code>
 </pre>
   
