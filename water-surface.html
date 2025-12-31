@@ -103,84 +103,11 @@ ArcGIS Online Viewer
   loading="eager">
 </iframe>
 
-<h2>Main Code snippet:</h2>
-<p> Full Code: </p> <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">Google Collab</a>
-<pre>
-  <code>
-def main(study_area_filename):
-    '''
-    Main script processing all images with a loop through all years, calculating NDWI, 
-    clipping to the given study area polygon, and reclassifying images to show visual representation.
-    INPUT: string provided in setup of the filename for the study area
-    USAGE:
-    >>main("amistad_study_area.shp")
-    '''
+<h2>Code</h2>
+<iframe src="WaterSurfaceAreaPython.html" width="500" height="300" frameborder="0">
+  <p>Your browser does not support iframes.</p>
+</iframe>
 
-    count_list = []
-    year_list = []
-    date_list = []
-    
-    for root, dirs, files in os.walk(landsats): #for folder in landsats
-    
-        if root == landsats: # skipping the parent folder bc it'll return a dictionary error bc theres no bands in this folder
-            continue
-        
-        scenes = {}   # reset for each folder, empty dictionary to contain keys of NIR and Green to access their respective files
-        subfolder_name = os.path.basename(root) # Retrieves the subfolder name, which should be the year of the images
-        print(f"Starting processing for {subfolder_name}")
-        
-        for file in files: #for file in folder in landsats
-            
-            if file.endswith(".aux.xml"):
-                continue
-    
-            file_name = os.path.basename(file)
-            satellite = determineSatellite(file_name)
-            bands = BandMap[satellite]
-            date = file_name[17:25]
-            
-            if bands['NIR'] in file_name:
-                scenes['NIR'] = os.path.join(root, file) # Assigning the file to 'NIR' and 'Green' in a dictionary to access for raster calculation
-            elif bands['Green'] in file_name:
-                scenes['Green'] = os.path.join(root, file)
-    
-        result = calcNDWI(scenes) # Uses calcNDWI function on the scenes set, computing ndwi for this year
-
-        print(f"Calculated NDWI for {subfolder_name}")
-
-        # MOVE THIS TO UP THE PROCESSING TIME ON ALL THE NDWI IMAGES- MOVE IT TO BEFORE THE NDWI CALCULATION??? MAY NEED TO CHANGE SOME SYSTEMS 
-        # Clipping the result of the NDWI to only the waterbody to exclude other ones
-        clip_out = path+"\\"+f"out{subfolder_name}.tif"
-        try:
-            study_area_shapefile = study_area + "\\" + study_area_filename
-            arcpy.management.Clip(result, "", clip_out , in_template_dataset=study_area_shapefile, clipping_geometry=True, nodata_value=0)
-        except arcpy.ExecuteError:
-            print(arcpy.GetMessages(2))
-            print(f"USER ERROR: This error is likely caused by there being no shapefile in {study_area} folder. Put a shapefile in this folder to solve this error")
-        
-        # Reclassifying the clipped raster so that now only the values >0 remain, which are the water values
-        reclass_out = Reclassify(clip_out, "Value", remap, "NODATA")
-        arcpy.management.Delete(clip_out) #delete the clipped raster, no longer needed
-        reclass = (f"ndwi_clip_reclass_{subfolder_name}.tif")
-        reclass_outpath = os.path.join(ndwi_output, reclass)
-        reclass_out.save(reclass_outpath)
-        print(f"Reclassified image to NaN value for non-water.")
-        
-        #Pandas dataframe for the count of the values in raster
-        arcpy.management.BuildRasterAttributeTable(reclass_outpath, "OVERWRITE") 
-        fields = ["VALUE", "COUNT"] 
-        
-        with arcpy.da.SearchCursor(reclass_outpath, fields) as cursor:
-            for row in cursor:
-                count_list.append(row[1])
-                year_list.append(subfolder_name)
-                date_list.append(date)
-        print("=+=+="*20)
-
-    return count_list, year_list, date_list
-    print("====="*10 + " Done. " + "====="*10)
-  </code>
-</pre>
   
 <p>
 <a href="index.html">← Back to Home</a>
