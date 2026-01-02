@@ -168,30 +168,24 @@ given year which can be used for visualization and a graph using Matplotlib and 
 <li>Uses Pandas to make a table/graph showing change in surface area of water body over time.</li>
 </ul>
 
-<h2>Limitations</h2>
+<h2>Conclusions</h2>
+<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
 <ul>
-<li>Landsat’s 30m^2 resolution, impacts on accuracy with edge detection being likely the main cause for the discrepancy between official observations and from the script.</li>
-<li>Study areas are from TWDB shapefiles with a 100 meteter buffer, and must be manually made/added per body</li>
+<li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
+</ul>
+
+<p><strong>Each tested water body has varying amounts of accuracy compared to TWDB data, and the script consistently underestimates area</strong></p>
+<ul>
+<li>Edge detection along shorelines and riverine areas were not being classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and to limitations of the NDWI index</li>
+<li>Error between official area and from our script was consistent for each water body.</li>
+<li>Other services/satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but it does not have as extensive of image history</li>
 </ul>
 
 <h2>Possible Improvements</h2>
 <ul>
-<li>Use USGS API for gathering Landsat images automatically</li>
-<li>Numpy arrays to speed up processing</li>
-<li>Calculating volume using contour line data/TINs and the surface raster</li>
-</ul>
-
-<h2>Conclusions</h2>
-<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
-<ul>
-<li>Error between official area and from our script was consistent for each water body</li>
-<li>Able to estimate surface area for water bodies with lack of historical data</li>
-</ul>
-
-<p><strong>Varying amounts of accuracy compared to TWDB data script consistently underestimates area</strong></p>
-<ul>
-<li>Edge detection along shorelines and riverine areas were not being classified as water as seen in visualizations, most likely due to coarseness of imagery and to limitations of the NDWI index</li>
-<li>Other services/satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but it does not have as extensive of image history</li>
+<li>Use USGS API for gathering Landsat images automatically.</li>
+<li>Numpy arrays to speed up processing.</li>
+<li>Calculating volume using contour line data/TINs and the surface raster.</li>
 </ul>
   
 <br>
@@ -243,18 +237,15 @@ given year which can be used for visualization and a graph using Matplotlib and 
 
         <div class="tab-content">
           <div class="tab-panel active">
-            <img src="images/figure_Lake_Buchanan.png" alt="Canyon Lake graph">
+            <img src="images/figure_Lake_Buchanan.png" alt="Lake Buchanan graph">
           </div>
           <div class="tab-panel">
-            <img src="images/lakebuchanan_table.png" alt="Canyon Lake table">
+            <img src="images/lakebuchanan_table.png" alt="Lake Buchanan table">
           </div>
         </div>
       </div>
 
     </div>
-
-  </div>
-</div>
 
     <!-- Lake Travis -->
     <div class="tab-panel">
@@ -266,10 +257,10 @@ given year which can be used for visualization and a graph using Matplotlib and 
 
         <div class="tab-content">
           <div class="tab-panel active">
-            <img src="images/figure_Lake_Buchanan.png" alt="Canyon Lake graph">
+            <img src="images/figure_Lake_Travis.png" alt="Lake Travis graph">
           </div>
           <div class="tab-panel">
-            <img src="images/lakebuchanan_table.png" alt="Canyon Lake table">
+            <img src="images/Travis_table.png" alt="Lake Travis table">
           </div>
         </div>
       </div>
