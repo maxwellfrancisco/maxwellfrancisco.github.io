@@ -154,18 +154,18 @@ given year which can be used for visualization and a graph using Matplotlib and 
 <ul>
 <li>Name of water body (for automatic folder creation and graph).</li>
 <li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
-<li>Shapefile containing desired water body study area in order to clip raster.</li>
+<li>Shapefile of desired water body boundary area to clip the rasters.</li>
 </ul>
 
 <p><strong>Processing</strong></p>
 <ul>
-<li>Determines NIR/Green bands from file names.</li>
+<li>Determines NIR/Green bands from default Landsat file names.</li>
 <li>NDWI calculation with these bands.</li>
-<li>Clips output raster to given study area.</li>
-<li>Reclassifies study area with values > 0 as 1 (water), else classified No Data.</li>
-<li>Calculation of surface area in square meters and acres from reclassified image.</li>
+<li>Clips NDWI raster to given study area shapefile.</li>
+<li>Reclassifies study area with values greater than 0 as 1 (water), else (not water) classified No Data.</li>
+<li>Calculation of surface area in square meters and acres from the reclassified image.</li>
 <li>Continues this process, looping through each year (folder).</li>
-<li>Uses Pandas to make a table/graph showing change in surface area of water body over time.</li>
+<li>Uses Pandas to make a graph/table showing change in surface area of the water body over time.</li>
 </ul>
 
 <h2>Conclusions</h2>
@@ -174,11 +174,11 @@ given year which can be used for visualization and a graph using Matplotlib and 
 <li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
 </ul>
 
-<p><strong>Each tested water body has varying amounts of accuracy compared to TWDB data, and the script consistently underestimates area</strong></p>
+<p><strong>Each water body which was tested had varying amounts of accuracy compared to TWDB data, with the script consistently underestimating.</strong></p>
 <ul>
-<li>Edge detection along shorelines and riverine areas were not being classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and to limitations of the NDWI index</li>
-<li>Error between official area and from our script was consistent for each water body.</li>
-<li>Other services/satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but it does not have as extensive of image history</li>
+<li>Issues with edge detection along shorelines and riverine areas were areas should have been classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and limitations of the NDWI index.</li>
+<li>However, error between official area and from the script was consistent for each water body which makes it easy to correct for, and ability to estimate historical surface area where official measurements do not exist.</li>
+<li>Other services and satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but they do not have as extensive of image history as Landsat.</li>
 </ul>
 
 <h2>Possible Improvements</h2>
@@ -217,7 +217,6 @@ given year which can be used for visualization and a graph using Matplotlib and 
             class="map-embed"
             src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&share=true&center=-98.27459040226908,29.885642751314283&scale=72223.819286"
             loading="eager"></iframe>
-            <p>Graph made with Pandas and Matplotlib</p>
           </div>
           <div class="tab-panel">
             <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
@@ -243,6 +242,7 @@ given year which can be used for visualization and a graph using Matplotlib and 
         <div class="tab-content">
           <div class="tab-panel active">
             <img src="images/figure_Lake_Buchanan.png" alt="Lake Buchanan graph">
+            <p>Lake Buchanan's area has not fluctuated greatly in the past 40 years. Graph made with Pandas and Matplotlib. </p>
           </div>
           <div class="tab-panel">
             <img src="images/lakebuchanan_table.png" alt="Lake Buchanan table">
