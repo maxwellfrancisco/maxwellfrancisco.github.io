@@ -18,6 +18,10 @@
       font-weight: bold;
     }
 
+    h1 {
+      margin-bottom: 5px;
+    }
+
     a:link,
     a:visited {
       color: #1a1a1a;
@@ -36,6 +40,12 @@
       margin: 20px 0;
     }
 
+    ul {
+      margin-top: 5px;
+    }
+
+    /* ===== Tabs ===== */
+
     .tab-container {
       margin: 20px 0;
     }
@@ -50,9 +60,9 @@
       padding: 10px 16px;
       border: none;
       background: none;
+      font-size: 1rem;
       cursor: pointer;
       border-bottom: 3px solid transparent;
-      font-size: 1rem;
     }
 
     .tab-btn.active {
@@ -91,8 +101,58 @@
 
 <h2>Overview</h2>
 <p>
-This project uses ArcPy to determine water body surface area using NDWI.
+This project uses ArcPy to determine the surface area of a water body using the
+Normalized Difference Water Index (NDWI). The user inputs Landsat imagery, a
+study-area shapefile, and the name of the water body. The script outputs rasters
+containing classified water pixels and generates plots and tables using Pandas
+and Matplotlib to analyze long-term change.
 </p>
+
+<h2>Workflow / Methodology</h2>
+
+<p>User Inputs</p>
+<ul>
+  <li>Name of water body (for automatic folder creation and graphing).</li>
+  <li>Landsat NIR/Green bands grouped by year from USGS EarthExplorer.</li>
+  <li>Shapefile defining the study area used for raster clipping.</li>
+</ul>
+
+<p>Processing</p>
+<ul>
+  <li>Identifies NIR and Green bands from file naming conventions.</li>
+  <li>Calculates NDWI.</li>
+  <li>Clips raster outputs to the study area.</li>
+  <li>Reclassifies pixels with NDWI &gt; 0 as water; others as NoData.</li>
+  <li>Calculates surface area in square meters and acres.</li>
+  <li>Loops across yearly imagery.</li>
+  <li>Uses Pandas to generate summary tables and time-series plots.</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>Landsat’s 30 m resolution impacts shoreline accuracy.</li>
+  <li>Study areas are derived from TWDB shapefiles with a 100 m buffer.</li>
+</ul>
+
+<h2>Possible Improvements</h2>
+<ul>
+  <li>Automated image acquisition via the USGS API.</li>
+  <li>Use of NumPy arrays to improve performance.</li>
+  <li>Volume estimation using contours or TINs.</li>
+</ul>
+
+<h2>Conclusions</h2>
+<p><strong>Long-term trends in water surface area were successfully identified.</strong></p>
+<ul>
+  <li>Error relative to TWDB data was consistent per water body.</li>
+  <li>The method allows estimation where historical data is lacking.</li>
+</ul>
+
+<p><strong>Accuracy varied relative to official observations.</strong></p>
+<ul>
+  <li>Underestimation likely due to shoreline misclassification.</li>
+  <li>Higher-resolution datasets (e.g., Sentinel, GEE) may improve accuracy.</li>
+</ul>
 
 <hr>
 
@@ -106,7 +166,7 @@ This project uses ArcPy to determine water body surface area using NDWI.
 
   <div class="tab-content">
 
-    <!-- ================= CANYON LAKE ================= -->
+    <!-- ===== Canyon Lake ===== -->
     <div class="tab-panel active">
 
       <iframe
@@ -133,7 +193,7 @@ This project uses ArcPy to determine water body surface area using NDWI.
 
     </div>
 
-    <!-- ================= LAKE BUCHANAN ================= -->
+    <!-- ===== Lake Buchanan ===== -->
     <div class="tab-panel">
 
       <div class="tab-container">
@@ -164,7 +224,7 @@ This project uses ArcPy to determine water body surface area using NDWI.
 
 <p><a href="index.html">← Back to Home</a></p>
 
-<!-- ================= TAB LOGIC ================= -->
+<!-- ================= TAB SCRIPT ================= -->
 <script>
   document.querySelectorAll('.tab-container').forEach(container => {
 
