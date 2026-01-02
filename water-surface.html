@@ -18,10 +18,6 @@
       font-weight: bold;
     }
 
-    h1 {
-      margin-bottom: 5px;
-    }
-
     a:link,
     a:visited {
       color: #1a1a1a;
@@ -40,59 +36,45 @@
       margin: 20px 0;
     }
 
-    ul {
-      margin-top: 5px;
+    .tab-container {
+      margin: 20px 0;
     }
 
-  .tab-container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .tab-buttons {
-    display: flex;
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 12px;
-  }
-  
-  .tab-btn {
-    padding: 10px 16px;
-    border: none;
-    background: none;
-    font-size: 1rem;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-  }
-  
-  .tab-btn.active {
-    border-bottom-color: #333;
-    font-weight: 600;
-  }
-  
-  .tab-panel {
-    display: none;
-  }
-  
-  .tab-panel.active {
-    display: block;
-  }
-  
-  .tab-panel img {
-    width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
-  }
-  
-  .tab-panel {
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-  
-  .tab-panel.active {
-    display: block;
-    opacity: 1;
-  }
+    .tab-buttons {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 12px;
+    }
 
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      font-size: 1rem;
+    }
+
+    .tab-btn.active {
+      border-bottom-color: #333;
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      border: 1px solid #ddd;
+    }
   </style>
 </head>
 
@@ -101,64 +83,20 @@
 <nav>
   <a href="index.html">Home</a>
   <a href="resume.html" target="_blank">Resume</a>
-  <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">LinkedIn</a>  
+  <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">LinkedIn</a>
 </nav>
 
 <h1>Water Body Surface Area over Time with Python</h1>
 <p><strong>Tools:</strong> ArcPy, Pandas, Raster Algebra.</p>
 
-  
-
 <h2>Overview</h2>
 <p>
-This project uses ArcPy to determine the surface area of a water body using the Normalized Water Difference Index (NDWI). The user inputs the
-Landsat images, water body study area shapefile, and the name of the water body. The script outputs rasters containing the water pixels for each 
-given year which can be used for visualization and a graph using Matplotlib and Pandas to show change in water surface area over time.
+This project uses ArcPy to determine water body surface area using NDWI.
 </p>
 
-<h2>Workflow/Methodology</h2>
-<p>User Inputs</p>
-<ul>
-<li>Name of water body (for automatic folder creation and graph).</li>
-<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
-<li>Shapefile containing desired water body study area in order to clip raster.</li>
-</ul>
-<p>Processing</p>
-<ul>
-<li>Determines NIR/Green bands from file names.</li>
-<li>NDWI calculation with these bands.</li>
-<li>Clips output raster to given study area.</li>
-<li>Reclassifies study area with values > 0 as 1 (water), else classified No Data.</li>
-<li>Calculation of surface area in square meters and acres from reclassified image.</li>
-<li>Continues this process, looping through each year (folder).</li>
-<li>Uses Pandas to make a table/graph showing change in surface area of water body over time.</li>
-</ul>
+<hr>
 
-<h2>Limitations</h2>
-<ul>
-<li>Landsat’s 30m^2 resolution, impacts on accuracy with edge detection being likely the main cause for the discrepancy between official observations and from the script.</li>
-<li>Study areas are from TWDB shapefiles with a 100 meteter buffer, and must be manually made/added per body</li>
-</ul>
-
-<h2>Possible Improvements</h2>
-<ul>
-<li>Use USGS API for gathering Landsat images automatically</li>
-<li>Numpy arrays to speed up processing</li>
-<li>Calculating volume using contour line data/TINs and the surface raster</li>
-</ul>
-
-<h2>Conclusions</h2>
-<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
-<ul>
-<li>Error between official area and from our script was consistent for each water body</li>
-<li>Able to estimate surface area for water bodies with lack of historical data</li>
-</ul>
-<p><strong>Varying amounts of accuracy compared to TWDB data script consistently underestimates area</strong></p>
-<ul>
-<li>Edge detection along shorelines and riverine areas were not being classified as water as seen in visualizations, most likely due to coarseness of imagery and to limitations of the NDWI index</li>
-<li>Other services/satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but it does not have as extensive of image history</li>
-</ul>
-
+<!-- ================= OUTER TABS ================= -->
 <div class="tab-container">
 
   <div class="tab-buttons">
@@ -167,95 +105,91 @@ given year which can be used for visualization and a graph using Matplotlib and 
   </div>
 
   <div class="tab-content">
+
+    <!-- ================= CANYON LAKE ================= -->
     <div class="tab-panel active">
 
-    <iframe
-      class="map-embed"
-      src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&information=true&share=true&scroll=false&center=-98.26720896306023,29.886982249462605&scale=72223.819286"
-      loading="eager">
-    </iframe>
-      
-    <div class="tab-container">
-    
-      <div class="tab-buttons">
-        <button class="tab-btn active">Graph</button>
-        <button class="tab-btn">Table</button>
-      </div>
-    
-      <div class="tab-content">
-        <div class="tab-panel active">
-          <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
+      <iframe
+        class="map-embed"
+        src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee"
+        loading="eager">
+      </iframe>
+
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active">Graph</button>
+          <button class="tab-btn">Table</button>
         </div>
-    
-        <div class="tab-panel">
-          <img src="images/canyonlake_table.png" alt="Canyon Lake table">
+
+        <div class="tab-content">
+          <div class="tab-panel active">
+            <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
+          </div>
+          <div class="tab-panel">
+            <img src="images/canyonlake_table.png" alt="Canyon Lake table">
+          </div>
         </div>
       </div>
-    
-    </div>
-    
+
     </div>
 
+    <!-- ================= LAKE BUCHANAN ================= -->
     <div class="tab-panel">
-      <img src="images/canyonlake_table.png" alt="Canyon Lake table">
-    </div>
-  </div>
 
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active">Graph</button>
+          <button class="tab-btn">Table</button>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-panel active">
+            <img src="images/figure_Lake_Buchanan.png" alt="Lake Buchanan graph">
+          </div>
+          <div class="tab-panel">
+            <img src="images/lakebuchanan_table.png" alt="Lake Buchanan table">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
-  
-  
-<br>
----
-  
-<p>
-The script allows for easy adjustability to measure other water bodies with user inputs of: Landsat images, the study area shapefile name, and the name of the water body (for automatic folder creation and graphing).
-This is another example of Lake Buchanan, TX which was analyzed using this script.
-</p>
 
-<div class="tab-container">
-
-  <div class="tab-buttons">
-    <button class="tab-btn active">Graph</button>
-    <button class="tab-btn">Table</button>
-  </div>
-
-  <div class="tab-content">
-    <div class="tab-panel active">
-      <img src="images/figure_Lake_Buchanan.png" alt="Canyon Lake graph">
-    </div>
-
-    <div class="tab-panel">
-      <img src="images/lakebuchanan_table.png" alt="Canyon Lake table">
-    </div>
-  </div>
-
-</div>
+<hr>
 
 <h2>Code</h2>
-<iframe src="WaterSurfaceAreaPython.html" width="900" height="500" frameborder="0">
-  <p>Your browser does not support iframes.</p>
-</iframe>
-  
-<p>
-<a href="index.html">← Back to Home</a>
-</p>
+<iframe src="WaterSurfaceAreaPython.html" width="900" height="500" frameborder="0"></iframe>
 
+<p><a href="index.html">← Back to Home</a></p>
+
+<!-- ================= TAB LOGIC ================= -->
 <script>
   document.querySelectorAll('.tab-container').forEach(container => {
-    const buttons = container.querySelectorAll('.tab-btn');
-    const panels = container.querySelectorAll('.tab-panel');
+
+    const buttons = Array.from(
+      container.querySelector('.tab-buttons').children
+    );
+
+    const panels = Array.from(
+      container.querySelector('.tab-content').children
+    );
 
     buttons.forEach((btn, index) => {
       btn.addEventListener('click', () => {
+
         buttons.forEach(b => b.classList.remove('active'));
         panels.forEach(p => p.classList.remove('active'));
 
         btn.classList.add('active');
         panels[index].classList.add('active');
+
       });
     });
+
   });
 </script>
-  
+
 </body>
 </html>
