@@ -42,27 +42,38 @@
 
     ul {
       margin-top: 5px;
+    }
+
+    /* ===== TAB SYSTEM (CHILD TABS ONLY) ===== */
+
     .tab-container {
-      margin: 20px 0;
+      margin: 30px 0;
+      padding: 15px 20px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
     }
 
     .tab-buttons {
       display: flex;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 1px solid #ccc;
       margin-bottom: 12px;
     }
 
     .tab-btn {
-      padding: 10px 16px;
+      padding: 6px 12px;
       border: none;
       background: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
+      border-bottom: 2px solid transparent;
+      color: #555;
     }
 
     .tab-btn.active {
-      border-bottom-color: #333;
+      border-bottom-color: #555;
+      color: #000;
       font-weight: 600;
     }
 
@@ -81,32 +92,6 @@
       width: 100%;
       border: 1px solid #ddd;
     }
-    /* ===== SECONDARY (GRAPH / TABLE) TABS ===== */
-    .tab-panel .tab-container .tab-buttons {
-      border-bottom: 1px solid #ccc;
-      margin-top: 10px;
-    }
-    
-    .tab-panel .tab-container .tab-btn {
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 6px 12px;
-      color: #555;
-    }
-    
-    .tab-panel .tab-container .tab-btn.active {
-      border-bottom: 2px solid #555;
-      color: #000;
-    }
-    
-    /* ===== CHILD TAB CONTENT CONTAINER ===== */
-    .tab-panel .tab-container {
-      padding: 15px 20px;
-      background: #fafafa;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      
-    }
   </style>
 </head>
 
@@ -121,14 +106,11 @@
 <h1>Burn Severity of the 2025 Crabapple Fire near Fredericksburg, TX</h1>
 <p><strong>Tools:</strong> ArcGIS Pro, Raster Algebra</p>
 
-  
-
 <h2>Overview</h2>
 <p>
 The Crabapple Fire was located in Gillespie county, roughly 10 miles north of Fredericksburg near Enchanted Rock. It began on March 15, 2025 before 
 being declared 100% contained by the City of Fredericksburg on March 21.
 </p>
-
 
 <h2>Data</h2>
 <ul>
@@ -137,8 +119,8 @@ being declared 100% contained by the City of Fredericksburg on March 21.
 
 <h2>Methods</h2>
 <ul>
-<li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
-  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR. </li>
+  <li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
+  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR.</li>
   <li>Calculate Difference Normalized Burn Ratio (dBNR) Pre-fire NBR - Post-fire NBR for each image after the start date.</li>
   <li>Clipping of raster to the area of interest.</li>
   <li>Reclassification of raster into 4 classes, NoData for values below 0.1 and 3 severity classes above.</li>
@@ -146,7 +128,7 @@ being declared 100% contained by the City of Fredericksburg on March 21.
 
 <h2>Limitations</h2>
 <ul>
-<li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
+  <li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
 </ul>
 
 <br>
@@ -154,37 +136,36 @@ being declared 100% contained by the City of Fredericksburg on March 21.
 <br>
 
 <div class="tab-container">
-  <div class="tab-panel active">
-    <div class="tab-container">
-      <div class="tab-buttons">
-        <button class="tab-btn active">Map</button>
-        <button class="tab-btn">Graph</button>
-        <button class="tab-btn">Table</button>
-      </div>
-  
-      <div class="tab-content">
-        <div class="tab-panel active">
-          <img
-          src="images/CrabappleLayout.png"
-          alt="poster"
-          width="900">
-        </div>
-        <div class="tab-panel">
-          <img src="images/crabapple_fire_graph.png" alt="Crabapple Fire graph">
-          <p>Graph made with Pandas and Matplotlib</p>
-        </div>
-        <div class="tab-panel">
-          <img src="images/crabapple_table.png" alt="Canyon Lake table">
-          <p>TWDB surface area data for Canyon Lake only goes back to 2015.</p>
-        </div>
-      </div>
-    </div>
+
+  <div class="tab-buttons">
+    <button class="tab-btn active">Map</button>
+    <button class="tab-btn">Graph</button>
+    <button class="tab-btn">Table</button>
   </div>
+
+  <div class="tab-content">
+
+    <div class="tab-panel active">
+      <img src="images/CrabappleLayout.png" alt="poster" width="900">
+    </div>
+
+    <div class="tab-panel">
+      <img src="images/crabapple_fire_graph.png" alt="Crabapple Fire graph">
+      <p>Graph made with Pandas and Matplotlib</p>
+    </div>
+
+    <div class="tab-panel">
+      <img src="images/crabapple_table.png" alt="Canyon Lake table">
+      <p>TWDB surface area data for Canyon Lake only goes back to 2015.</p>
+    </div>
+
+  </div>
+</div>
 
 <br>
 <hr>
 <br>
-  
+
 <p>
 <a href="index.html">← Back to Home</a>
 </p>
@@ -192,13 +173,8 @@ being declared 100% contained by the City of Fredericksburg on March 21.
 <script>
   document.querySelectorAll('.tab-container').forEach(container => {
 
-    const buttons = Array.from(
-      container.querySelector('.tab-buttons').children
-    );
-
-    const panels = Array.from(
-      container.querySelector('.tab-content').children
-    );
+    const buttons = container.querySelectorAll('.tab-btn');
+    const panels = container.querySelectorAll('.tab-panel');
 
     buttons.forEach((btn, index) => {
       btn.addEventListener('click', () => {
@@ -214,6 +190,6 @@ being declared 100% contained by the City of Fredericksburg on March 21.
 
   });
 </script>
- 
+
 </body>
 </html>
