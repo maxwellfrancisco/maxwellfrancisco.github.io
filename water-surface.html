@@ -216,7 +216,7 @@ The script allows for easy adjustability to measure other water bodies with user
 This is another example of Lake Buchanan, TX which was analyzed using this script.
 </p>
   
-<img
+<!-- <img
   src="images/figure_Lake_Buchanan.png" 
   alt="poster"
   width="900">
@@ -224,9 +224,38 @@ This is another example of Lake Buchanan, TX which was analyzed using this scrip
 <img
   src="images/lakebuchanan_table.png"
   alt="poster"
-  width="900">
+  width="900"> -->
 
+<div class="tab-container">
 
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="showTab('graph')">
+      Graph
+    </button>
+    <button class="tab-btn" onclick="showTab('table')">
+      Table
+    </button>
+  </div>
+
+  <div class="tab-content">
+
+    <div id="graph" class="tab-panel active">
+      <img
+        src="images/figure_Lake_Buchanan.png"
+        alt="Lake Buchanan surface area graph">
+        <p> Graph created from Pandas dataframes and Matplotlib. </p> 
+    </div>
+
+    <div id="table" class="tab-panel">
+      <img
+        src="images/lakebuchanan_table.png"
+        alt="Lake Buchanan surface area table">
+      <p> This table shows the counts found from the python script and the official TWDB observations. </p>
+    </div>
+
+  </div>
+
+</div>
   
 <p>
 <a href="index.html">← Back to Home</a>
