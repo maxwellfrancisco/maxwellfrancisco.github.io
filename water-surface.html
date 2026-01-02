@@ -93,7 +93,7 @@
       font-size: 1.15rem;
       font-weight: 700;
       padding: 14px 22px;
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: 0.5px;
     }
     
@@ -150,14 +150,14 @@ given year which can be used for visualization and a graph using Matplotlib and 
 </p>
 
 <h2>Workflow/Methodology</h2>
-<p>User Inputs</p>
+<p><strong>User Inputs</strong></p>
 <ul>
 <li>Name of water body (for automatic folder creation and graph).</li>
 <li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
 <li>Shapefile containing desired water body study area in order to clip raster.</li>
 </ul>
 
-<p>Processing</p>
+<p><strong>Processing</strong></p>
 <ul>
 <li>Determines NIR/Green bands from file names.</li>
 <li>NDWI calculation with these bands.</li>
