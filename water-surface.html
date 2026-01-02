@@ -204,18 +204,22 @@ given year which can be used for visualization and a graph using Matplotlib and 
 
     <!-- Canyon Lake -->
     <div class="tab-panel active">
-    <iframe
-    class="map-embed"
-    src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&share=true&center=-98.27459040226908,29.885642751314283&scale=72223.819286"
-    loading="eager"></iframe>
       <div class="tab-container">
         <div class="tab-buttons">
-          <button class="tab-btn active">Graph</button>
+          <button class="tab-btn active">Map</button>
+          <button class="tab-btn">Graph</button>
           <button class="tab-btn">Table</button>
         </div>
 
         <div class="tab-content">
           <div class="tab-panel active">
+            <iframe
+            class="map-embed"
+            src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&share=true&center=-98.27459040226908,29.885642751314283&scale=72223.819286"
+            loading="eager"></iframe>
+            <p>Graph made with Pandas and Matplotlib</p>
+          </div>
+          <div class="tab-panel">
             <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
             <p>Graph made with Pandas and Matplotlib</p>
           </div>
