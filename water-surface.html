@@ -44,38 +44,6 @@
       margin-top: 5px;
     }
 
-      .image-row {
-    display: flex;
-    gap: 24px;
-    align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .image-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Force identical image heights */
-  .image-item img {
-    width: 100%;
-    height: 400px;          /* SAME HEIGHT */
-    object-fit: contain;   /* no distortion */
-    border: 1px solid #ddd;
-  }
-  
-  /* Optional: stack on smaller screens */
-  @media (max-width: 900px) {
-    .image-row {
-      flex-direction: column;
-    }
-  
-    .image-item img {
-      height: 300px;
-    }
-  }
   </style>
 </head>
 
@@ -151,28 +119,13 @@ ArcGIS Online Viewer
   loading="eager">
 </iframe>
   
-  <div class="image-row">
-    <div class="image-item">
-      <p>
-        Graph with the same data created from Pandas dataframes and Matplotlib.
-      </p>
-      <img
-        src="images/figure_Canyon_Lake.png"
-        alt="Canyon Lake surface area graph">
-    </div>
-
-    <div class="image-item">
-      <p>
-        This table shows the counts found from the python script and the official
-        TWDB observations. TWDB only has surface area observations from 2015 onwards
-        for Canyon Lake.
-      </p>
-      <img
-        src="images/canyonlake_table.png"
-        alt="Canyon Lake surface area table">
-    </div>
-  </div>
+<p> Graph created from Pandas dataframes and Matplotlib. </p> 
   
+<img src="images/figure_Canyon_Lake.png" alt="poster" width="900">
+  
+<img src="images/canyonlake_table.png" alt="poster" width="900">
+<p> This table shows the counts found from the python script and the official TWDB observations. 
+TWDB only has surface area observations from 2015 onwards for Canyon Lake. </p>
 
 <br>
 ---
