@@ -66,28 +66,22 @@ Landsat images, water body study area shapefile, and the name of the water body.
 given year which can be used for visualization and a graph using Matplotlib and Pandas to show change in water surface area over time.
 </p>
 
-<h2>Data</h2>
-<ul>
-  <li>Landsat Images</li>
-  <li>Texas Water Development Board (TWDB) Water Shapefiles and Surface Area</li>
-</ul>
-
 <h2>Workflow/Methodology</h2>
 <p>User Inputs</p>
 <ul>
-<li>Name of water body (for automatic folder creation and graph)</li>
-<li>Landsat NIR/Green bands grouped by folder by year from EarthExplorer</li>
-<li>Shapefile containing desired water body study area to clip raster</li>
+<li>Name of water body (for automatic folder creation and graph).</li>
+<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
+<li>Shapefile containing desired water body study area in order to clip raster.</li>
 </ul>
 <p>Processing</p>
 <ul>
-<li>Determines NIR/Green bands from file names</li>
-<li>NDWI calculation with bands</li>
-<li>Clips output raster to given study area</li>
-<li>Reclassifies study area with values > 0 as 1 (water), else No Data</li>
-<li>Calculation of surface area in square meters and acres from reclassified image</li>
-<li>Continues process looping through each year (folder)</li>
-<li>Uses Pandas to make a table/graph showing change in surface area of water body over time</li>
+<li>Determines NIR/Green bands from file names.</li>
+<li>NDWI calculation with these bands.</li>
+<li>Clips output raster to given study area.</li>
+<li>Reclassifies study area with values > 0 as 1 (water), else classified No Data.</li>
+<li>Calculation of surface area in square meters and acres from reclassified image.</li>
+<li>Continues this process, looping through each year (folder).</li>
+<li>Uses Pandas to make a table/graph showing change in surface area of water body over time.</li>
 </ul>
 
 <h2>Limitations</h2>
@@ -104,15 +98,14 @@ given year which can be used for visualization and a graph using Matplotlib and 
 </ul>
 
 <h2>Conclusions</h2>
-<p>Overall long-time trends in water surface area of water bodies were able to be determined</p>
+<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
 <ul>
 <li>Error between official area and from our script was consistent for each water body</li>
 <li>Able to estimate surface area for water bodies with lack of historical data</li>
 </ul>
-<p>Overall long-time trends in water surface area of water bodies were able to be determined</p>
+<p><strong>Varying amounts of accuracy compared to TWDB data script consistently underestimates area</strong></p>
 <ul>
-<li>Edge detection along shorelines and riverine areas were not being detected as seen in visualizations</li>
-<li>Potentially some error due to limitations of the NDWI index</li>
+<li>Edge detection along shorelines and riverine areas were not being classified as water as seen in visualizations, most likely due to coarseness of imagery and to limitations of the NDWI index</li>
 <li>Other services/satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but it does not have as extensive of image history</li>
 </ul>
 
