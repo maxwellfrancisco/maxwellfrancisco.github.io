@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maxwell Francisco - Supervised Classification</title>
+
+  <style>
+    body {
+      font-family: Trebuchet MS, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    a:link,
+    a:visited {
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #444;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ddd;
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-top: 5px;
+    }
+
+    /* ===== TAB SYSTEM (CHILD TABS ONLY) ===== */
+
+    .tab-container {
+      margin: 30px 0;
+      padding: 15px 20px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: #555;
+    }
+
+    .tab-btn.active {
+      border-bottom-color: #555;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="resume.html" target="_blank">Resume</a>
+  <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">LinkedIn</a>  
+</nav>
+
+<h1>2025 Crabapple Fire Severity</h1>
+<p><strong>Tools:</strong> ArcGIS Pro, Raster Algebra, Reclassification</p>
+
+<h2>Overview</h2>
+<p>
+The difference Normalized Burn Ratio (dNBR) was used to analyze fire severity of the 2025 Crabapple Fire. A total of 6 images from Senintel were processed to show change over
+time and progress of the burn. 
+<br>
+<br>
+The Crabapple fire began on March 15, 2025 in Gillespie county, roughly 10 miles north of Fredericksburg near Enchanted Rock. 
+It was declared 100% contained by the City of Fredericksburg on March 21. 
+</p>
+
+<h2>Data</h2>
+<ul>
+  <li>Sentinel L2A - 20m^2 resolution images</li>
+</ul>
+
+<h2>Workflow/Methods</h2>
+<ul>
+  <li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
+  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR.</li>
+  <li>Calculate Difference Normalized Burn Ratio (dBNR) Pre-fire NBR - Post-fire NBR for each image after the start date.</li>
+  <li>Clipping of raster to the area of interest.</li>
+  <li>Reclassification of raster into 4 classes, NoData for values below 0.1 and 3 severity classes above.</li>
+</ul>
+
+<h2>Results</h2>
+<ul>
+  <li>Five images were produced showing the fire during and after its burn.</li>
+    <li>Spatial patterns and burn progress of the fire is seen through mapping, and the speedy regrowth time of grassland environments from fire can be seen.</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
+</ul>
+
+<div class="tab-container">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active">Map</button>
+    <button class="tab-btn">Graph</button>
+    <button class="tab-btn">Table</button>
+  </div>
+
+  <div class="tab-content">
+
+    <div class="tab-panel active">
+      <img src="images/CrabappleLayout.png" alt="poster" width="900">
+    </div>
+
+    <div class="tab-panel">
+      <img src="images/crabapple_fire_graph.png" alt="Crabapple Fire graph">
+      <p>Graph made with Pandas and Matplotlib</p>
+    </div>
+
+    <div class="tab-panel">
+      <img src="images/crabapple_table.png" alt="Canyon Lake table">
+      <p>2025 Crabapple Fire Area by dNBR Severity (acres)</p>
+    </div>
+
+  </div>
+</div>
+
+<br>
+<hr>
+<br>
+
+<p>
+<a href="index.html">← Back to Home</a>
+</p>
+
+<script>
+  document.querySelectorAll('.tab-container').forEach(container => {
+
+    const buttons = container.querySelectorAll('.tab-btn');
+    const panels = container.querySelectorAll('.tab-panel');
+
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        panels[index].classList.add('active');
+
+      });
+    });
+
+  });
+</script>
+
+</body>
+</html>
