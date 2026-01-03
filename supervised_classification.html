@@ -103,71 +103,48 @@
   <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">LinkedIn</a>  
 </nav>
 
-<h1>2025 Crabapple Fire Severity</h1>
-<p><strong>Tools:</strong> ArcGIS Pro, Raster Algebra, Reclassification</p>
+<h1>Landuse/Landcover Supervised Classification of the Austin Watershed</h1>
+<p><strong>Tools:</strong> QGIS, Supervised Classification, Rasters </p>
 
 <h2>Overview</h2>
 <p>
-The difference Normalized Burn Ratio (dNBR) was used to analyze fire severity of the 2025 Crabapple Fire. A total of 6 images from Senintel were processed to show change over
-time and progress of the burn. 
-<br>
-<br>
-The Crabapple fire began on March 15, 2025 in Gillespie county, roughly 10 miles north of Fredericksburg near Enchanted Rock. 
-It was declared 100% contained by the City of Fredericksburg on March 21. 
+The Supervised Classification Plugin (SCP) was used in QGIS in order to semi-automatically classify landuse/landcover in the Austin area watershed 
+using a set of manually selected samples from a true color image. Result accuracy were tested using a selection of random points with known ground truths.
 </p>
 
 <h2>Data</h2>
 <ul>
-  <li>Sentinel L2A - 20m^2 resolution images</li>
+  <li>Landsat 8 bands (1-7) clipped to the Austin Watershed area of interest</li>
 </ul>
 
 <h2>Workflow/Methods</h2>
 <ul>
-  <li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
-  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR.</li>
-  <li>Calculate Difference Normalized Burn Ratio (dBNR) Pre-fire NBR - Post-fire NBR for each image after the start date.</li>
-  <li>Clipping of raster to the area of interest.</li>
-  <li>Reclassification of raster into 4 classes, NoData for values below 0.1 and 3 severity classes above.</li>
+  <li>All bands (besides thermal) from Landsat-8 image loaded into QGIS Supervised Classification Plugin (SCP) band sets</li>
+  <li>Spectral training set gathered for landuse/landcover types of Agriculture, Water, Urban, Vegetation, and Bare Soil with the natural color band combination.</li>
+  <li>Ran classification with training set making output landuse/landcover raster.</li>
+  <li>Accuracy of classification tested with random points with known ground truths with a confusion matrix and kappa hat.</li>
 </ul>
 
 <h2>Results</h2>
+
+<img src="images/supervised_classifcation.png" alt="poster" width="900">
+
 <ul>
-  <li>Five images were produced showing the fire during and after its burn.</li>
-    <li>Spatial patterns and burn progress of the fire is seen through mapping, and the speedy regrowth time of grassland environments from fire can be seen.</li>
+  <p>Agricultural | Urban | Water	| Vegetation | Bare Soil</p>
+  <p>460.6902 |	56.1771	| 802.5255| 1190.7558	| 701.9784 km^2</p>
+  <li>Kappa Hat = 0.798.</li>
 </ul>
-
-<h2>Limitations</h2>
+  
+<p>Confusion Matrix</p>
+<img src="images/confusion_matrix.png" alt="poster" width="900">
+<li>Kappa Hat = 0.798.</li>
+  
+<h2>Limitations/Possible Improvements</h2>
 <ul>
-  <li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
+  <li>More samples could be used in the bare soil class. It is hard to distinguish landuse from landcover from the case of agriculture and vegetation with these classes having similar spectral signatures in this dataset.</li>
+  <li>Limitations of Landsat's spectral and spatial resolution in accuracy, more bands and higher spatial resolution could improve results.</li>
 </ul>
-
-<div class="tab-container">
-
-  <div class="tab-buttons">
-    <button class="tab-btn active">Map</button>
-    <button class="tab-btn">Graph</button>
-    <button class="tab-btn">Table</button>
-  </div>
-
-  <div class="tab-content">
-
-    <div class="tab-panel active">
-      <img src="images/CrabappleLayout.png" alt="poster" width="900">
-    </div>
-
-    <div class="tab-panel">
-      <img src="images/crabapple_fire_graph.png" alt="Crabapple Fire graph">
-      <p>Graph made with Pandas and Matplotlib</p>
-    </div>
-
-    <div class="tab-panel">
-      <img src="images/crabapple_table.png" alt="Canyon Lake table">
-      <p>2025 Crabapple Fire Area by dNBR Severity (acres)</p>
-    </div>
-
-  </div>
-</div>
-
+  
 <br>
 <hr>
 <br>
