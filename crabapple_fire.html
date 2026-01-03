@@ -116,31 +116,6 @@ The Crabapple fire began on March 15, 2025 in Gillespie county, roughly 10 miles
 It was declared 100% contained by the City of Fredericksburg on March 21. 
 </p>
 
-<h2>Data</h2>
-<ul>
-  <li>Sentinel L2A - 20m^2 resolution images</li>
-</ul>
-
-<h2>Workflow/Methods</h2>
-<ul>
-  <li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
-  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR.</li>
-  <li>Calculate Difference Normalized Burn Ratio (dBNR) Pre-fire NBR - Post-fire NBR for each image after the start date.</li>
-  <li>Clipping of raster to the area of interest.</li>
-  <li>Reclassification of raster into 4 classes, NoData for values below 0.1 and 3 severity classes above.</li>
-</ul>
-
-<h2>Results</h2>
-<ul>
-  <li>Five images were produced showing the fire during and after its burn.</li>
-    <li>Spatial patterns and burn progress of the fire is seen through mapping, and the speedy regrowth time of grassland environments from fire can be seen.</li>
-</ul>
-
-<h2>Limitations</h2>
-<ul>
-  <li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
-</ul>
-
 <div class="tab-container">
 
   <div class="tab-buttons">
@@ -167,6 +142,25 @@ It was declared 100% contained by the City of Fredericksburg on March 21.
 
   </div>
 </div>
+  
+<h2>Data</h2>
+<ul>
+  <li>Sentinel L2A - 20m^2 resolution images</li>
+</ul>
+
+<h2>Workflow/Methods</h2>
+<ul>
+  <li>6 images from March 14, 19, 21, 24, 29, and April 8.</li>
+  <li>Calculate Normalized Burn Ratio (NBR) with raster algebra NIR - SWIR / NIR + SWIR.</li>
+  <li>Calculate Difference Normalized Burn Ratio (dBNR) Pre-fire NBR - Post-fire NBR for each image after the start date.</li>
+  <li>Clipping of raster to the area of interest.</li>
+  <li>Reclassification of raster into 4 classes, NoData for values below 0.1 and 3 severity classes above.</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>The severity classes used are more adjusted for heavily forested environments, not the lower values of a grassland fire. Another scale adapted for grasslands would work better to measure burn severity in this area.</li>
+</ul>
 
 <br>
 <hr>
