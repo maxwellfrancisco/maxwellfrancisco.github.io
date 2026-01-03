@@ -80,25 +80,8 @@ The Supervised Classification Plugin (SCP) was used in QGIS in order to semi-aut
 using a set of manually selected samples from a true color image. Result accuracy were tested using a selection of random points with known ground truths.
 </p>
 
-<h2>Data</h2>
-<ul>
-  <li>Landsat 8 bands (1-7) clipped to the Austin Watershed area of interest</li>
-</ul>
-
-<h2>Workflow/Methods</h2>
-<ul>
-  <li>All bands (besides thermal) from Landsat-8 image loaded into QGIS Supervised Classification Plugin (SCP) band sets</li>
-  <li>Spectral training set gathered for landuse/landcover types of Agriculture, Water, Urban, Vegetation, and Bare Soil with the natural color band combination.</li>
-  <li>Ran classification with training set making output landuse/landcover raster.</li>
-  <li>Accuracy of classification tested with random points with known ground truths with a confusion matrix and kappa hat.</li>
-</ul>
-
-<h2>Results</h2>
-
 <img src="images/supervised_classification.png" alt="poster" width="900">
-  
-<br>
-  
+
 <ul>
 <p style="text-align: center;"><strong>Austin Watershed AOI by Landuse/Landcover Classification (km^2)</strong></p>
 <table border="1" cellpadding="8" cellspacing="0">
@@ -123,10 +106,23 @@ using a set of manually selected samples from a true color image. Result accurac
 </table>
 </ul>
   
-<h2><strong>Accuracy</strong></h2>
+<h2>Data</h2>
+<ul>
+  <li>Landsat 8 bands (1-7) clipped to the Austin Watershed area of interest</li>
+</ul>
+
+<h2>Workflow/Methods</h2>
+<ul>
+  <li>All bands (besides thermal) from Landsat-8 image loaded into QGIS Supervised Classification Plugin (SCP) band sets</li>
+  <li>Spectral training set gathered for landuse/landcover types of Agriculture, Water, Urban, Vegetation, and Bare Soil with the natural color band combination.</li>
+  <li>Ran classification with training set making output landuse/landcover raster.</li>
+  <li>Accuracy of classification tested with random points with known ground truths with a confusion matrix and kappa hat.</li>
+</ul>
+  
+<h2><strong>Accuracy Assessments</strong></h2>
 <p><strong>Confusion Matrix</strong></p>
 <img src="images/confusion_matrix.png" alt="poster" width="900">
-<li>Kappa Hat = 0.798, Moderate-Strong Agreement.</li>
+<li><strong>Kappa Hat</strong> = 0.798, Moderate-Strong Agreement.</li>
   
 <h2>Limitations/Possible Improvements</h2>
 <ul>
