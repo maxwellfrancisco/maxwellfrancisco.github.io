@@ -43,6 +43,55 @@
     ul {
       margin-top: 5px;
     }
+
+ /* ===== TAB SYSTEM (CHILD TABS ONLY) ===== */
+
+    .tab-container {
+      margin: 30px 0;
+      padding: 15px 20px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: #555;
+    }
+
+    .tab-btn.active {
+      border-bottom-color: #555;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      border: 1px solid #ddd;
+    }
   </style>
 </head>
 
@@ -56,57 +105,43 @@
 
 <h1>Various Maps</h1>
 
-<p>These were created as a part of a cartography course, and mostly focus on cartographic principles, data curation and normalization, and different ways to portray data.</p>
-  
-<img
-  src="images/various_maps/Snow_map.png" 
-  alt="poster"
-  width="900">
+<p>These were created as a part of a Cartographic Design and Environmental GIS courses, and mostly focus on cartographic principles, data curation and normalization, and different methods of data visualization.</p>
 
-<img
-  src="images/various_maps/cities.png" 
-  alt="poster"
-  width="900">
+<div class="tab-container">
 
-<img
-  src="images/various_maps/uscountypop.png" 
-  alt="poster"
-  width="900">
+  <div class="tab-buttons">
+    <button class="tab-btn active">Environmental/Weather</button>
+    <button class="tab-btn">Agriculture/Livestock</button>
+    <button class="tab-btn">Population</button>
+    <button class="tab-btn">Miscellaneous</button>
+  </div>
 
-<img
-  src="images/various_maps/goats.png" 
-  alt="poster"
-  width="900">
+  <div class="tab-content">
 
-<img
-  src="images/various_maps/texas_pop_change.png" 
-  alt="poster"
-  width="900">
+    <div class="tab-panel active">
+      <img src="images/various_maps/Snow_map.png" alt="poster" width="900">
+      <img src="images/various_maps/st_croix_watershed.png" alt="poster" width="900">
+      <img src="images/various_maps/interpolation.png" alt="poster" width="900">  
+    </div>
 
-<img
-  src="images/various_maps/corn.png" 
-  alt="poster"
-  width="900">
+    <div class="tab-panel">
+      <img src="images/various_maps/goats.png" alt="poster" width="900">
+      <img src="images/various_maps/corn.png" alt="poster" width="900">
+    </div>
 
-<img
-  src="images/various_maps/cost_calculation.png" 
-  alt="poster"
-  width="900">
+    <div class="tab-panel">
+      <img src="images/various_maps/cities.png" alt="poster" width="900">
+      <img src="images/various_maps/uscountypop.png" alt="poster" width="900">
+      <img src="images/various_maps/texas_pop_change.png" alt="poster" width="900">
+      <img src="images/various_maps/population_persqkm.png" alt="poster" width="900">
+    </div>
 
-<img
-  src="images/various_maps/interpolation.png" 
-  alt="poster"
-  width="900">
+    <div class="tab-panel">
+      <img src="images/various_maps/cost_calculation.png" alt="poster" width="900">
+    </div>
 
-<img
-  src="images/various_maps/population_persqkm.png" 
-  alt="poster"
-  width="900">
-
-<img
-  src="images/various_maps/st_croix_watershed.png" 
-  alt="poster"
-  width="900">
+  </div>
+</div>
   
 <br>
 <hr>
@@ -116,5 +151,26 @@
 <a href="index.html">← Back to Home</a>
 </p>
 
+<script>
+  document.querySelectorAll('.tab-container').forEach(container => {
+
+    const buttons = container.querySelectorAll('.tab-btn');
+    const panels = container.querySelectorAll('.tab-panel');
+
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        panels[index].classList.add('active');
+
+      });
+    });
+
+  });
+</script>
+  
 </body>
 </html>
