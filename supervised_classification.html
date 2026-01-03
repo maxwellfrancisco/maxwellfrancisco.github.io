@@ -43,54 +43,22 @@
     ul {
       margin-top: 5px;
     }
-
-    /* ===== TAB SYSTEM (CHILD TABS ONLY) ===== */
-
-    .tab-container {
-      margin: 30px 0;
-      padding: 15px 20px;
-      background: #fafafa;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-    }
-
-    .tab-buttons {
-      display: flex;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 12px;
-    }
-
-    .tab-btn {
-      padding: 6px 12px;
-      border: none;
-      background: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      color: #555;
-    }
-
-    .tab-btn.active {
-      border-bottom-color: #555;
-      color: #000;
-      font-weight: 600;
-    }
-
-    .tab-panel {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-    }
-
-    .tab-panel.active {
-      display: block;
-      opacity: 1;
-    }
-
-    .tab-panel img {
+    
+    table {
+      border-collapse: collapse;
       width: 100%;
-      border: 1px solid #ddd;
+      max-width: 700px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+
+
     }
   </style>
 </head>
@@ -128,9 +96,11 @@ using a set of manually selected samples from a true color image. Result accurac
 <h2>Results</h2>
 
 <img src="images/supervised_classification.png" alt="poster" width="900">
-
+  
+<br>
+  
 <ul>
-<p>Austin Watershed AOI by Landuse/Landcover Classification(km^2)</p>
+<p><strong>Austin Watershed AOI by Landuse/Landcover Classification (km^2)</strong></p>
 <table border="1" cellpadding="8" cellspacing="0">
   <thead>
     <tr>
