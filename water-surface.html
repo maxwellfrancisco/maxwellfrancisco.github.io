@@ -149,49 +149,6 @@ Landsat images, water body study area shapefile, and the name of the water body.
 given year which can be used for visualization and a graph using Matplotlib and Pandas to show change in water surface area over time.
 </p>
 
-<h2>Workflow/Methodology</h2>
-<p><strong>User Inputs</strong></p>
-<ul>
-<li>Name of water body (for automatic folder creation and graph).</li>
-<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
-<li>Shapefile of desired water body boundary area to clip the rasters.</li>
-</ul>
-
-<p><strong>Processing</strong></p>
-<ul>
-<li>Determines NIR/Green bands from default Landsat file names.</li>
-<li>NDWI calculation with these bands.</li>
-<li>Clips NDWI raster to given study area shapefile.</li>
-<li>Reclassifies study area with values greater than 0 as 1 (water), else (not water) classified No Data.</li>
-<li>Calculation of surface area in square meters and acres from the reclassified image.</li>
-<li>Continues this process, looping through each year (folder).</li>
-<li>Uses Pandas to make a graph/table showing change in surface area of the water body over time.</li>
-</ul>
-
-<h2>Conclusions</h2>
-<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
-<ul>
-<li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
-</ul>
-
-<p><strong>Each water body which was tested had varying amounts of accuracy compared to TWDB data, with the script consistently underestimating.</strong></p>
-<ul>
-<li>Issues with edge detection along shorelines and riverine areas were areas should have been classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and limitations of the NDWI index.</li>
-<li>However, error between official area and from the script was consistent for each water body which makes it easy to correct for, and ability to estimate historical surface area where official measurements do not exist.</li>
-<li>Other services and satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but they do not have as extensive of image history as Landsat.</li>
-</ul>
-
-<h2>Possible Improvements</h2>
-<ul>
-<li>Use USGS API for gathering Landsat images automatically.</li>
-<li>Numpy arrays to speed up processing.</li>
-<li>Calculating volume using contour line data/TINs and the surface raster.</li>
-</ul>
-  
-<br>
-<hr>
-<br>
-  
 <!-- ================= OUTER TABS ================= -->
 <div class="tab-container">
 
@@ -254,7 +211,46 @@ given year which can be used for visualization and a graph using Matplotlib and 
 
   </div>
 </div>
+  
+<h2>Workflow/Methodology</h2>
+<p><strong>User Inputs</strong></p>
+<ul>
+<li>Name of water body (for automatic folder creation and graph).</li>
+<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
+<li>Shapefile of desired water body boundary area to clip the rasters.</li>
+</ul>
 
+<p><strong>Processing</strong></p>
+<ul>
+<li>Determines NIR/Green bands from default Landsat file names.</li>
+<li>NDWI calculation with these bands.</li>
+<li>Clips NDWI raster to given study area shapefile.</li>
+<li>Reclassifies study area with values greater than 0 as 1 (water), else (not water) classified No Data.</li>
+<li>Calculation of surface area in square meters and acres from the reclassified image.</li>
+<li>Continues this process, looping through each year (folder).</li>
+<li>Uses Pandas to make a graph/table showing change in surface area of the water body over time.</li>
+</ul>
+
+<h2>Conclusions</h2>
+<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
+<ul>
+<li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
+</ul>
+
+<p><strong>Each water body which was tested had varying amounts of accuracy compared to TWDB data, with the script consistently underestimating.</strong></p>
+<ul>
+<li>Issues with edge detection along shorelines and riverine areas were areas should have been classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and limitations of the NDWI index.</li>
+<li>However, error between official area and from the script was consistent for each water body which makes it easy to correct for, and ability to estimate historical surface area where official measurements do not exist.</li>
+<li>Other services and satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but they do not have as extensive of image history as Landsat.</li>
+</ul>
+
+<h2>Possible Improvements</h2>
+<ul>
+<li>Use USGS API for gathering Landsat images automatically.</li>
+<li>Numpy arrays to speed up processing.</li>
+<li>Calculating volume using contour line data/TINs and the surface raster.</li>
+</ul>
+  
 <br>
 <hr>
 <br>
