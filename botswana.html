@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maxwell Francisco - Botswana</title>
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  
+  <style>
+    body {
+      font-family: Trebuchet MS, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    a:link,
+    a:visited {
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #444;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ddd;
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-top: 5px;
+    }
+
+    .tab-container {
+      margin: 20px 0;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+      border-bottom-color: #333;
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+
+    /* ===== PRIMARY (LAKE) TABS ===== */
+    .tab-container > .tab-buttons {
+      margin-top: 30px;
+    }
+    
+    .tab-container > .tab-buttons .tab-btn {
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 14px 22px;
+      text-transform: none;
+      letter-spacing: 0.5px;
+    }
+    
+    .tab-container > .tab-buttons .tab-btn.active {
+      border-bottom: 4px solid #000;
+    }
+
+    /* ===== SECONDARY (GRAPH / TABLE) TABS ===== */
+    .tab-panel .tab-container .tab-buttons {
+      border-bottom: 1px solid #ccc;
+      margin-top: 10px;
+    }
+    
+    .tab-panel .tab-container .tab-btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      color: #555;
+    }
+    
+    .tab-panel .tab-container .tab-btn.active {
+      border-bottom: 2px solid #555;
+      color: #000;
+    }
+    
+    .tab-panel .tab-container {
+      padding: 15px 20px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="resume.html" target="_blank">Resume</a>
+  <a href="https://www.linkedin.com/in/maxwell-francisco/" target="_blank">LinkedIn</a>  
+</nav>
+
+<h1>Tracking Fire along the Trans-Kalahari Highway in Botswana</h1>
+<p><strong>Tools:</strong> ArcPy, Raster Algebra, ArcGIS Pro.</p>
+
+<h2>Overview</h2>
+<p>
+This is an ongoing and in-progress project focused on analyzing patterns of burns and shrub encroachment on a stretch of the Trans-Kalahari Highway in Botswana. The goals
+of this project are to understand how fire impacts on the landscape, particularly in helping prevent shrub encroachment in the Kalahari with a combination of on-the-ground
+data points and satellite imagery.
+</p>
+
+<!-- ================= OUTER TABS ================= -->
+<div class="tab-container">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active">Canyon Lake</button>
+    <button class="tab-btn">Lake Buchanan</button>
+  </div>
+
+  <div class="tab-content">
+
+    <!-- Canyon Lake -->
+    <div class="tab-panel active">
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active">Map</button>
+          <button class="tab-btn">Graph</button>
+          <button class="tab-btn">Table</button>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-panel active">
+            <iframe
+            class="map-embed"
+            src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&share=true&center=-98.27459040226908,29.885642751314283&scale=72223.819286"
+            loading="eager"></iframe>
+          </div>
+          <div class="tab-panel">
+            <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
+            <p>Graph made with Pandas and Matplotlib</p>
+          </div>
+          <div class="tab-panel">
+            <img src="images/canyonlake_table.png" alt="Canyon Lake table">
+            <p>TWDB surface area data for Canyon Lake only goes back to 2015.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Lake Buchanan -->
+    <div class="tab-panel">
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-btn active">Graph</button>
+          <button class="tab-btn">Table</button>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-panel active">
+            <img src="images/figure_Lake_Buchanan.png" alt="Lake Buchanan graph">
+            <p>Lake Buchanan's area has not fluctuated greatly in the past 40 years. Graph made with Pandas and Matplotlib. </p>
+          </div>
+          <div class="tab-panel">
+            <img src="images/lakebuchanan_table.png" alt="Lake Buchanan table">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+  
+<h2>Workflow/Methodology</h2>
+<p><strong>User Inputs</strong></p>
+<ul>
+<li>Name of water body (for automatic folder creation and graph).</li>
+<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
+<li>Shapefile of desired water body boundary area to clip the rasters.</li>
+</ul>
+
+<p><strong>Processing</strong></p>
+<ul>
+<li>Determines NIR/Green bands from default Landsat file names.</li>
+<li>NDWI calculation with these bands.</li>
+<li>Clips NDWI raster to given study area shapefile.</li>
+<li>Reclassifies study area with values greater than 0 as 1 (water), else (not water) classified No Data.</li>
+<li>Calculation of surface area in square meters and acres from the reclassified image.</li>
+<li>Continues this process, looping through each year (folder).</li>
+<li>Uses Pandas to make a graph/table showing change in surface area of the water body over time.</li>
+</ul>
+
+<h2>Conclusions</h2>
+<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
+<ul>
+<li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
+</ul>
+
+<p><strong>Each water body which was tested had varying amounts of accuracy compared to TWDB data, with the script consistently underestimating.</strong></p>
+<ul>
+<li>Issues with edge detection along shorelines and riverine areas were areas should have been classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and limitations of the NDWI index.</li>
+<li>However, error between official area and from the script was consistent for each water body which makes it easy to correct for, and ability to estimate historical surface area where official measurements do not exist.</li>
+<li>Other services and satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but they do not have as extensive of image history as Landsat.</li>
+</ul>
+
+<h2>Possible Improvements</h2>
+<ul>
+<li>Use USGS API for gathering Landsat images automatically.</li>
+<li>Numpy arrays to speed up processing.</li>
+<li>Calculating volume using contour line data/TINs and the surface raster.</li>
+</ul>
+  
+<br>
+<hr>
+<br>
+
+<h2>Python Script</h2>
+<iframe src="WaterSurfaceAreaPython.html" width="900" height="500" frameborder="0">
+  <p>Your browser does not support iframes.</p>
+</iframe>
+
+<br>
+<hr>
+<br>
+  
+<p>
+<a href="index.html">← Back to Home</a>
+
+</p>
+
+<script>
+  document.querySelectorAll('.tab-container').forEach(container => {
+
+    const buttons = Array.from(
+      container.querySelector('.tab-buttons').children
+    );
+
+    const panels = Array.from(
+      container.querySelector('.tab-content').children
+    );
+
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        panels[index].classList.add('active');
+
+      });
+    });
+
+  });
+</script>
+
+</body>
+</html>
