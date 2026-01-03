@@ -42,6 +42,56 @@
 
     ul {
       margin-top: 5px;
+
+    /* ===== TAB SYSTEM (CHILD TABS ONLY) ===== */
+
+    .tab-container {
+      margin: 30px 0;
+      padding: 15px 20px;
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 6px 12px;
+      border: none;
+      background: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: #555;
+    }
+
+    .tab-btn.active {
+      border-bottom-color: #555;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .tab-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .tab-panel img {
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+
     }
   </style>
 </head>
@@ -58,7 +108,6 @@
 <p><strong>Tools:</strong> ArcGIS Pro, Georeferencing, Digitization, Adobe Illustrator</p>
 
   
-
 <h2>Overview</h2>
 <p>
 This map was produced for a poster presentation at the UT 2025 Undergraduate Research Apprenticeship Symposium. It was created to help the audience visualize the site and its location within Peru. 
@@ -66,18 +115,40 @@ Further work is to be done analyzing how the spatial distribution of artifacts a
 <br>
 <br>
 The aqllawasi was an Inca institution of cloistered religious women across the Andes, serving to educate young girls in Inca crafts such as brewing and weaving, and project
-imperial power. The aqllawasi at Huánuco Pampa is the best surviving archaeological example of these institutions making it highly valuable for study. 
-  
+imperial power. The aqllawasi at Huánuco Pampa is the best surviving archaeological example of these institutions making it highly valuable for study.   
 </p>
 
+
+<div class="tab-container">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active">Research Poster Map</button>
+    <button class="tab-btn">ArcGIS Online Map</button>
+  </div>
+
+  <div class="tab-content">
+
+    <div class="tab-panel active">
+      <img src="images/huanuco_poster_map.png" alt="poster" width="900">
+    </div>
+
+    <div class="tab-panel">
+      <iframe
+        class="map-embed"
+        src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=45cdcad30cc74c98b24be5097928a715&theme=light&heading=true&legend=true&scroll=false&center=-76.81617448421562,-9.873085988907114&scale=2256.994353"
+        loading="eager">
+      </iframe>
+    </div>
+
+  </div>
+</div>
+  
 
 <h2>Data</h2>
 <ul>
   <li>Map of the site in the form of non-spatially referenced image</li>
   <li>Artifact images from the site archive</li>
 </ul>
-
-
 
 <h2>Methods</h2>
 <ul>
@@ -86,29 +157,34 @@ imperial power. The aqllawasi at Huánuco Pampa is the best surviving archaeolog
   <li>Adobe Illustrator in order to add artifact images and final aesthetic polishing for presentation.</li>
 </ul>
 
-<p>
-Map for Research Poster
-</p>
+<br>
+<hr>
+<br>
   
-<img
-  src="images/huanuco_poster_map.png" 
-  alt="poster"
-  width="900">
-
-<!-- MAP EMBED GOES HERE -->
-<p>
-ArcGIS Online Viewer
-</p>
-<iframe
-  class="map-embed"
-  src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=45cdcad30cc74c98b24be5097928a715&theme=light&heading=true&legend=true&scroll=false&center=-76.81617448421562,-9.873085988907114&scale=2256.994353"
-  loading="eager">
-</iframe>
-
-
 <p>
 <a href="index.html">← Back to Home</a>
 </p>
 
+<script>
+  document.querySelectorAll('.tab-container').forEach(container => {
+
+    const buttons = container.querySelectorAll('.tab-btn');
+    const panels = container.querySelectorAll('.tab-panel');
+
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        panels[index].classList.add('active');
+
+      });
+    });
+
+  });
+</script>
+  
 </body>
 </html>
