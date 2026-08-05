@@ -140,77 +140,15 @@
 </nav>
 
 <h1>Tracking Fire along the Trans-Kalahari Highway in Botswana</h1>
-<p><strong>Tools:</strong> ArcPy, Raster Algebra, ArcGIS Pro.</p>
+<p><strong>Tools:</strong> ArcPy, Raster Algebra, ArcGIS Pro, Google Earth Engine, Canva.</p>
 
 <h2>Overview</h2>
 <p>
 This is an ongoing and in-progress project focused on analyzing patterns of burns and shrub encroachment on a stretch of the Trans-Kalahari Highway in Botswana. The goals
-of this project are to understand how fire impacts on the landscape, particularly in helping prevent shrub encroachment in the Kalahari with a combination of on-the-ground
-data points and satellite imagery.
+of this project are to understand fire impacts the Kalahari landscape, particularly respects to shrub encroachment using combination of on-the-ground data points and satellite imagery.
 </p>
 
-<!-- ================= OUTER TABS ================= -->
-<div class="tab-container">
 
-  <div class="tab-buttons">
-    <button class="tab-btn active">Canyon Lake</button>
-    <button class="tab-btn">Lake Buchanan</button>
-  </div>
-
-  <div class="tab-content">
-
-    <!-- Canyon Lake -->
-    <div class="tab-panel active">
-      <div class="tab-container">
-        <div class="tab-buttons">
-          <button class="tab-btn active">Map</button>
-          <button class="tab-btn">Graph</button>
-          <button class="tab-btn">Table</button>
-        </div>
-
-        <div class="tab-content">
-          <div class="tab-panel active">
-            <iframe
-            class="map-embed"
-            src="https://www.arcgis.com/apps/mapviewer/index.html?configurableview=true&webmap=4103b20269cc4d7ba2f2ec0baca18dee&theme=light&heading=true&legend=true&share=true&center=-98.27459040226908,29.885642751314283&scale=72223.819286"
-            loading="eager"></iframe>
-          </div>
-          <div class="tab-panel">
-            <img src="images/figure_Canyon_Lake.png" alt="Canyon Lake graph">
-            <p>Graph made with Pandas and Matplotlib</p>
-          </div>
-          <div class="tab-panel">
-            <img src="images/canyonlake_table.png" alt="Canyon Lake table">
-            <p>TWDB surface area data for Canyon Lake only goes back to 2015.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Lake Buchanan -->
-    <div class="tab-panel">
-      <div class="tab-container">
-        <div class="tab-buttons">
-          <button class="tab-btn active">Graph</button>
-          <button class="tab-btn">Table</button>
-        </div>
-
-        <div class="tab-content">
-          <div class="tab-panel active">
-            <img src="images/figure_Lake_Buchanan.png" alt="Lake Buchanan graph">
-            <p>Lake Buchanan's area has not fluctuated greatly in the past 40 years. Graph made with Pandas and Matplotlib. </p>
-          </div>
-          <div class="tab-panel">
-            <img src="images/lakebuchanan_table.png" alt="Lake Buchanan table">
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
   
 <h2>Workflow/Methodology</h2>
 <p><strong>User Inputs</strong></p>
@@ -250,15 +188,6 @@ data points and satellite imagery.
 <li>Numpy arrays to speed up processing.</li>
 <li>Calculating volume using contour line data/TINs and the surface raster.</li>
 </ul>
-  
-<br>
-<hr>
-<br>
-
-<h2>Python Script</h2>
-<iframe src="WaterSurfaceAreaPython.html" width="900" height="500" frameborder="0">
-  <p>Your browser does not support iframes.</p>
-</iframe>
 
 <br>
 <hr>
