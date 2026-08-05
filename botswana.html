@@ -145,49 +145,13 @@
 <h2>Overview</h2>
 <p>
 This is an ongoing and in-progress project focused on analyzing patterns of burns and shrub encroachment on a stretch of the Trans-Kalahari Highway in Botswana. The goals
-of this project are to understand fire impacts the Kalahari landscape, particularly respects to shrub encroachment using combination of on-the-ground data points and satellite imagery.
+of this project are to understand the impact of fire the Kalahari landscape, particularly respects to shrub encroachment using combination of on-the-ground data points and satellite imagery.
 </p>
 
-
-  
-<h2>Workflow/Methodology</h2>
-<p><strong>User Inputs</strong></p>
-<ul>
-<li>Name of water body (for automatic folder creation and graph).</li>
-<li>Landsat NIR/Green bands grouped by folder by year from USGS EarthExplorer.</li>
-<li>Shapefile of desired water body boundary area to clip the rasters.</li>
-</ul>
-
-<p><strong>Processing</strong></p>
-<ul>
-<li>Determines NIR/Green bands from default Landsat file names.</li>
-<li>NDWI calculation with these bands.</li>
-<li>Clips NDWI raster to given study area shapefile.</li>
-<li>Reclassifies study area with values greater than 0 as 1 (water), else (not water) classified No Data.</li>
-<li>Calculation of surface area in square meters and acres from the reclassified image.</li>
-<li>Continues this process, looping through each year (folder).</li>
-<li>Uses Pandas to make a graph/table showing change in surface area of the water body over time.</li>
-</ul>
-
-<h2>Conclusions</h2>
-<p><strong>Overall long-time trends in water surface area of water bodies were able to be determined</strong></p>
-<ul>
-<li>Script allows for the estimatation of surface area for water bodies with lack of historical data and for a longer timeframe by using Landsat imagery.</li>
-</ul>
-
-<p><strong>Each water body which was tested had varying amounts of accuracy compared to TWDB data, with the script consistently underestimating.</strong></p>
-<ul>
-<li>Issues with edge detection along shorelines and riverine areas were areas should have been classified as water, most likely due to coarseness of Landsat's 30m^2 imagery and limitations of the NDWI index.</li>
-<li>However, error between official area and from the script was consistent for each water body which makes it easy to correct for, and ability to estimate historical surface area where official measurements do not exist.</li>
-<li>Other services and satellites such as Google Earth Engine and Sentinel may have higher resolution for more accurate counts, but they do not have as extensive of image history as Landsat.</li>
-</ul>
-
-<h2>Possible Improvements</h2>
-<ul>
-<li>Use USGS API for gathering Landsat images automatically.</li>
-<li>Numpy arrays to speed up processing.</li>
-<li>Calculating volume using contour line data/TINs and the surface raster.</li>
-</ul>
+<img src="images/Fire_Shrub_Kalahari_50x40_MaxwellFrancisco_IMG.png" alt="poster" width="900">
+<p>
+Research poster presented at the 2026 UT Geography Undergraduate Symposium.
+</p>
 
 <br>
 <hr>
